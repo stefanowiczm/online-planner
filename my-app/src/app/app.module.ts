@@ -2,14 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule} from '@angular/material';
+import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatDividerModule} from '@angular/material';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TasksListComponent } from './tasks-list/tasks-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TasksListComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,10 @@ import { AppComponent } from './app.component';
     MatGridListModule,
     MatCardModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatDividerModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,14 @@
-<mat-grid-list cols="2" rowHeight="400px" gutterSize="15">
+<mat-grid-list cols="2" rowHeight="600px" gutterSize="15">
   <mat-grid-tile [colspan]="1" [style.background-color]="lightblue" gutterSize="15px" >
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{ title }}</mat-card-title>
       </mat-card-header>        
-      <mat-card-content style="height: 300px">
+      <mat-card-content>
         <p>
-          drag & drop na listę zadań do utworzenia
-        </p>
+          1. formularz wpisania godziny od do
+        </p>        
+        <app-tasks-list></app-tasks-list>     
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
@@ -17,7 +18,7 @@
       <mat-card-header>
         <mat-card-title>Rozkład dnia</mat-card-title>
       </mat-card-header>
-      <mat-card-content style="height: 300px">
+      <mat-card-content style="height: 400px">
         <p>
           tu ma być tabela rozpoczynająca się od godziny wybranej w inpucie po lewej stronie.
           do tej tabelki można przeciągać zadania utworzone po lewej stronie
