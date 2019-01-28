@@ -7,12 +7,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksListComponent
+    ToDoListComponent
   ],
   imports: [
     BrowserModule,

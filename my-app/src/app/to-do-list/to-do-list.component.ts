@@ -11,18 +11,14 @@ export class ToDoListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
     if (!('indexedDB' in window)) {
       console.log('This browser doesn\'t support IndexedDB');
       return;
     } else {
       console.log('zaczynamy Gosiaczku!')
     }
-
-    var bazaDanych = window.indexedDB.open('test-db1', 1);
-
-
   }
+
 
   tasks = [
     'rozładować zmywarke',
