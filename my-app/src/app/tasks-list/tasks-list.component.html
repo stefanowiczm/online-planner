@@ -1,0 +1,11 @@
+<form class="example-form">
+  <mat-form-field  appearance="outline" style="width: 100% !important">
+    <mat-label>Moje zadanie na dziś to ...</mat-label>
+    <input matInput placeholder="Moje zadanie na dziś to ...">
+  </mat-form-field>
+  <button color="accent" mat-raised-button>Dodaj do listy</button>
+</form> 
+
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let task of tasks" cdkDrag>{{task}}</div>
+</div>
