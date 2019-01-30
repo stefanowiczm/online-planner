@@ -8,6 +8,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
+import {DexieService} from './dexie/dexie.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
     MatDividerModule,
     DragDropModule
   ],
-  providers: [],
+  providers: [
+    DexieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
