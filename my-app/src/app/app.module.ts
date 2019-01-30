@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import {DexieService} from './dexie/dexie.service';
+import { TodosService } from './services/todos.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {DexieService} from './dexie/dexie.service';
     DragDropModule
   ],
   providers: [
-    DexieService
+    DexieService,
+    TodosService
   ],
   bootstrap: [AppComponent]
 })
