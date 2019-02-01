@@ -1,2 +1,7 @@
-<input type="text" #box (keyup)="onKey(box.value)"/>
-<button type="button" (click)="onAddTodo()">Add Todo</button>
+<form class="example-form">
+    <mat-form-field  appearance="outline" style="width: 100% !important">
+      <mat-label>Moje zadanie na dziś to ...</mat-label>
+      <input matInput placeholder="Moje zadanie na dziś to ..." #box (keyup)="onKey(box.value)" (keyup.enter)="onAddTodo()">
+    </mat-form-field>
+    <button type="button" color="accent" mat-raised-button (click)="onAddTodo()">Dodaj do listy</button>
+  </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-task',
@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./add-task.component.sass']
 })
 export class AddTaskComponent implements OnInit {
+  @ViewChild('box') box: ElementRef;
   @Output() addTodo = new EventEmitter();
   title = '';
 
@@ -16,6 +17,7 @@ export class AddTaskComponent implements OnInit {
 
   onAddTodo() {
     this.addTodo.emit(this.title);
+    this.box.nativeElement.value = '';
   }
 
   onKey(value: string) {
