@@ -2,13 +2,18 @@
   <mat-grid-tile [colspan]="1" [style.background-color]="lightblue" gutterSize="15px" >
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ title }}</mat-card-title>
+        <!-- <mat-card-title>{{ title }}</mat-card-title> -->
       </mat-card-header>        
       <mat-card-content>
-        <p>
+        <!-- <p>
           1. formularz wpisania godziny od do
-        </p>        
-        <app-to-do-list></app-to-do-list>     
+        </p>         -->
+        <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
+        <app-to-do-list
+        [todos]="todosList"
+        (toggleTodo)="onToggleTodo($event)"
+        (deleteTodo)="onDeleteTodo($event)"
+        ></app-to-do-list>    
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>

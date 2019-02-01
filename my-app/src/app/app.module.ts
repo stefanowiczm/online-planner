@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import {DexieService} from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
+import { AddTaskComponent } from './add-task/add-task/add-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToDoListComponent
+    ToDoListComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,

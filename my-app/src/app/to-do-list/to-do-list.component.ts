@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { TodoWithID } from '../services/todos.service';
 
 @Component({
   selector: 'app-to-do-list',
@@ -7,18 +8,14 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./to-do-list.component.sass']
 })
 export class ToDoListComponent implements OnInit {
+  @Input() todos: Array<TodoWithID>;
+  @Output() toggleTodo = new EventEmitter();
+  @Output() deleteTodo = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit() {
-    if (!('indexedDB' in window)) {
-      console.log('This browser doesn\'t support IndexedDB');
-      return;
-    } else {
-      console.log('zaczynamy Gosiaczku!')
-    }
-  }
-
+  constructor(
+  //  public service: ServiceUIFrameContext,
+  //  private service: ServiceUIFrameContext
+  ) {}
 
   tasks = [
     'rozładować zmywarke',
@@ -28,8 +25,23 @@ export class ToDoListComponent implements OnInit {
     'Delikatesy'
   ];
 
+  ngOnInit() { }
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
+  onTodoToggle(event, id, newValue) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggleTodo.emit({
+      id,
+      done: newValue,
+    });
+  }
+
+  onDelete(id) {
+    this.deleteTodo.emit(id);
   }
 
 }
