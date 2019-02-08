@@ -38,20 +38,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
 
 @Component({
   selector: 'app-day-view-scheduler',
-//  styleUrls: ['./day-view-scheduler.component.sass'],
-  styles: [
-    `
-      .day-view-column-headers {
-        display: flex;
-        margin-left: 70px;
-      }
-      .day-view-column-header {
-        width: 150px;
-        border: solid 1px black;
-        text-align: center;
-      }
-    `
-  ],
+  styleUrls: ['./day-view-scheduler.component.sass'],
   providers: [
     {
       provide: CalendarUtils,
@@ -60,14 +47,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
   ],
   templateUrl: './day-view-scheduler.component.html'
 })
-// export class DayViewSchedulerComponent implements OnInit {
 
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 export class DayViewSchedulerComponent extends CalendarDayViewComponent {
   view: DayViewScheduler;
 
