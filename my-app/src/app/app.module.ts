@@ -36,7 +36,7 @@ import { DayViewSchedulerComponent } from './calendar/day-view-scheduler/day-vie
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    DemoUtilsModule
+    CalendarUtilsModule
   ],
   providers: [
     DexieService,
