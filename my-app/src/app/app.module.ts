@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatDividerModule} from '@angular/material';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AppMaterialModule } from './app-material/app-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,14 +29,8 @@ import { DayViewSchedulerComponent } from './calendar/day-view-scheduler/day-vie
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    AppMaterialModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatGridListModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDividerModule,
     DragDropModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
