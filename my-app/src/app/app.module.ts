@@ -11,19 +11,29 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { DexieService } from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+
+import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFormatter, CalendarDateFormatter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { DemoUtilsModule } from './calendar/calendar-utils/module';
+import { CalendarUtilsModule } from './calendar/calendar-utils/calendar-utils.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DayViewSchedulerComponent } from './calendar/day-view-scheduler/day-view-scheduler.component';
+
+class CustomDateFormatter extends CalendarNativeDateFormatter {
+  public dayViewHour({date, locale}: DateFormatterParams): string {
+    return new Intl.DateTimeFormat('ca', {
+      hour: 'numeric',
+      minute: 'numeric'
+    }).format(date);
+  }
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     ToDoListComponent,
     AddTaskComponent,
-    CalendarComponent,
-    DayViewSchedulerComponent
+    DayViewSchedulerComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +50,8 @@ import { DayViewSchedulerComponent } from './calendar/day-view-scheduler/day-vie
   ],
   providers: [
     DexieService,
-    TodosService
+    TodosService,
+    {provide: CalendarDateFormatter, useClass: CustomDateFormatter}
   ],
   bootstrap: [AppComponent]
 })
