@@ -25,12 +25,7 @@ const users = [
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.sass']
 })
-// export class CalendarComponent implements OnInit {
-//   constructor() { }
 
-//   ngOnInit() {
-//   }
-// }
 export class CalendarComponent {
   viewDate = new Date();
 
