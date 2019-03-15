@@ -11,8 +11,8 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { DexieService } from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
+import { AppCalendarModule } from './calendar/app-calendar.module';
 
-import { CalendarUtilsModule } from './calendar/calendar-utils/calendar-utils.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { CalendarUtilsModule } from './calendar/calendar-utils/calendar-utils.mo
     AppMaterialModule,
     BrowserAnimationsModule,
     DragDropModule,
-    CalendarUtilsModule
+    AppCalendarModule
   ],
   providers: [
     DexieService,

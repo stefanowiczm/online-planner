@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFormatter, CalendarDateFormatter } from 'angular-calendar';
-import { CalendarHeaderComponent } from './calendar-header.component';
-import { DayViewSchedulerComponent } from './day-view-scheduler/day-view-scheduler.component';
-import { CalendarComponent } from '../calendar.component';
+import { CalendarHeaderComponent } from './calendar-utils/calendar-header.component';
+import { DayViewSchedulerComponent } from './calendar-utils/day-view-scheduler/day-view-scheduler.component';
+import { CalendarComponent } from './calendar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {
@@ -39,4 +39,4 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     {provide: CalendarDateFormatter, useClass: CustomDateFormatter}
   ]
 })
-export class CalendarUtilsModule {}
+export class AppCalendarModule {}
