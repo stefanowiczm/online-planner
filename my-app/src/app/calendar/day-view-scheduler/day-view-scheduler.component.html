@@ -1,4 +1,4 @@
-<div class="cal-day-view" #dayViewContainer>
+<div class="cal-day-view" #dayViewContainer style="border: 2px solid red">
   <div class="day-view-column-headers">
     <div class="day-view-column-header" *ngFor="let user of view?.users">
       {{ user.name }}
@@ -60,12 +60,14 @@
         </mwl-calendar-day-view-event>
       </div>
     </div>
-    <div
+    <!-- ok tutaj są wyświetlane godziny -->
+    <div style="color:crimson"
       class="cal-hour"
       *ngFor="let hour of hours; trackBy: trackByHour"
-      [style.minWidth.px]="view?.width + 70"
+      [style.minWidth.px]="view?.width + 70"      
     >
-      <mwl-calendar-day-view-hour-segment
+      <mwl-calendar-day-view-hour-segment         
+        style="border: 1px solid blue"
         *ngFor="let segment of hour.segments; trackBy: trackByHourSegment"
         [style.height.px]="hourSegmentHeight"
         [segment]="segment"
@@ -77,6 +79,7 @@
         dragOverClass="cal-drag-over"
         dragActiveClass="cal-drag-active"
         (drop)="eventDropped($event, segment.date, false)"
+        (click)="myFunction(segment)"
       >
       </mwl-calendar-day-view-hour-segment>
     </div>

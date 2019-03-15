@@ -69,4 +69,7 @@ export class DayViewSchedulerComponent extends CalendarDayViewComponent {
       }
     }
   }
+  myFunction(segment): void {
+    console.log(segment);
+  }
 }
