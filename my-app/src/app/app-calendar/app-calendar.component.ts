@@ -3,7 +3,7 @@ import {
   CalendarEvent,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
-import { colors } from './calendar-utils/colors';
+import { colors } from './app-calendar-utils/colors';
 import { addHours, startOfDay } from 'date-fns';
 
 const users = [

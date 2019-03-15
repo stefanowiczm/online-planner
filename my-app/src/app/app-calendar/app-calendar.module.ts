@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFormatter, CalendarDateFormatter } from 'angular-calendar';
-import { AppCalendarHeaderComponent } from './calendar-utils/app-calendar-header.component';
-import { DayViewSchedulerComponent } from './calendar-utils/day-view-scheduler/day-view-scheduler.component';
+import { AppCalendarHeaderComponent } from './app-calendar-utils/app-calendar-header.component';
+import { DayViewSchedulerComponent } from './app-calendar-utils/day-view-scheduler/day-view-scheduler.component';
 import { AppCalendarComponent } from './app-calendar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
