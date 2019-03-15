@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFormatter, CalendarDateFormatter } from 'angular-calendar';
 import { AppCalendarHeaderComponent } from './calendar-utils/app-calendar-header.component';
 import { DayViewSchedulerComponent } from './calendar-utils/day-view-scheduler/day-view-scheduler.component';
-import { CalendarComponent } from './calendar.component';
+import { AppCalendarComponent } from './app-calendar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {
@@ -26,12 +26,12 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     }),
   ],
   declarations: [
-    CalendarComponent,
+    AppCalendarComponent,
     AppCalendarHeaderComponent,
     DayViewSchedulerComponent
   ],
   exports: [
-    CalendarComponent,
+    AppCalendarComponent,
     AppCalendarHeaderComponent,
     DayViewSchedulerComponent
   ],

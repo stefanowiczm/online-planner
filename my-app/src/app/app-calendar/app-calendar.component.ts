@@ -22,11 +22,11 @@ const users = [
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.sass']
+  templateUrl: './app-calendar.component.html',
+  styleUrls: ['./app-calendar.component.sass']
 })
 
-export class CalendarComponent {
+export class AppCalendarComponent {
   viewDate = new Date();
 
   events: CalendarEvent[] = [
