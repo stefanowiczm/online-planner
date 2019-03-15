@@ -41,7 +41,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     <br />
   `
 })
-export class CalendarHeaderComponent {
+export class AppCalendarHeaderComponent {
   @Input() view: string;
 
   @Input() viewDate: Date;
