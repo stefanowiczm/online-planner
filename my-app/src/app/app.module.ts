@@ -12,18 +12,7 @@ import { DexieService } from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
 
-import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFormatter, CalendarDateFormatter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarUtilsModule } from './calendar/calendar-utils/calendar-utils.module';
-
-class CustomDateFormatter extends CalendarNativeDateFormatter {
-  public dayViewHour({date, locale}: DateFormatterParams): string {
-    return new Intl.DateTimeFormat('ca', {
-      hour: 'numeric',
-      minute: 'numeric'
-    }).format(date);
-  }
-}
 
 @NgModule({
   declarations: [
@@ -38,16 +27,11 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     AppMaterialModule,
     BrowserAnimationsModule,
     DragDropModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
     CalendarUtilsModule
   ],
   providers: [
     DexieService,
-    TodosService,
-    {provide: CalendarDateFormatter, useClass: CustomDateFormatter}
+    TodosService
   ],
   bootstrap: [AppComponent]
 })
