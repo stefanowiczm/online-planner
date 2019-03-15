@@ -11,7 +11,7 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { DexieService } from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
-import { AppCalendarModule } from './calendar/app-calendar.module';
+import { AppCalendarModule } from './app-calendar/app-calendar.module';
 
 
 @NgModule({
