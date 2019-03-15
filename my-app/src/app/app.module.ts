@@ -16,7 +16,6 @@ import { CalendarModule, DateAdapter, DateFormatterParams, CalendarNativeDateFor
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarUtilsModule } from './calendar/calendar-utils/calendar-utils.module';
 import { CalendarComponent } from './calendar/calendar.component';
-import { DayViewSchedulerComponent } from './calendar/day-view-scheduler/day-view-scheduler.component';
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {
   public dayViewHour({date, locale}: DateFormatterParams): string {
@@ -32,7 +31,6 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     AppComponent,
     ToDoListComponent,
     AddTaskComponent,
-    DayViewSchedulerComponent,
     CalendarComponent
   ],
   imports: [
