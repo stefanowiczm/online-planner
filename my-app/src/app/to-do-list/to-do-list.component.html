@@ -1,26 +1,7 @@
-<!-- <form class="example-form">
-  <mat-form-field  appearance="outline" style="width: 100% !important">
-    <mat-label>Moje zadanie na dziś to ...</mat-label>
-    <input matInput placeholder="Moje zadanie na dziś to ...">
-  </mat-form-field>
-  <button color="accent" mat-raised-button>Dodaj do listy</button>
-</form>  -->
-
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let todo of todos" cdkDrag>
       <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
       <span>{{todo.title}}</span>
       <button type="button" (click)="onDelete(todo.id)">Delete</button>
   </div>
-</div>
-
-<div>
-  <h1>Dixie example</h1>
-  <ul>
-    <li *ngFor="let todo of todos">
-      <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
-      <span>{{todo.title}}</span>
-      <button type="button" (click)="onDelete(todo.id)">Delete</button>
-    </li>
-  </ul>
 </div>
