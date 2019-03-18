@@ -6,9 +6,13 @@
   <button color="accent" mat-raised-button>Dodaj do listy</button>
 </form>  -->
 
-<!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let task of tasks" cdkDrag>{{task}}</div>
-</div> -->
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let todo of todos" cdkDrag>
+      <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
+      <span>{{todo.title}}</span>
+      <button type="button" (click)="onDelete(todo.id)">Delete</button>
+  </div>
+</div>
 
 <div>
   <h1>Dixie example</h1>

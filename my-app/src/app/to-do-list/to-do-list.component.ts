@@ -17,18 +17,11 @@ export class ToDoListComponent implements OnInit {
   //  private service: ServiceUIFrameContext
   ) {}
 
-  tasks = [
-    'rozładować zmywarke',
-    'wstaw pranie',
-    'pojemniki',
-    'odkurzyć',
-    'Delikatesy'
-  ];
 
   ngOnInit() { }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
   }
 
   onTodoToggle(event, id, newValue) {
