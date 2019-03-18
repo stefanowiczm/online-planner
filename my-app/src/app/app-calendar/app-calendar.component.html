@@ -1,5 +1,11 @@
 <app-calendar-header></app-calendar-header>
 
+<li *ngFor="let todo of todos">
+  <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
+  <span>{{todo.title}}</span>
+  <button type="button" (click)="onDelete(todo.id)">Delete</button>
+</li>
+
 <app-day-view-scheduler
   [viewDate]="viewDate"
   [events]="events"

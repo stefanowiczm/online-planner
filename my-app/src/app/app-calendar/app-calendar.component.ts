@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
 import { colors } from './app-calendar-utils/colors';
 import { addHours, startOfDay } from 'date-fns';
+import { TodoWithID } from '../services/todos.service';
 
 const users = [
   {
@@ -28,7 +29,7 @@ const users = [
 
 export class AppCalendarComponent {
   viewDate = new Date();
-
+  @Input() todos: Array<TodoWithID>;
   events: CalendarEvent[] = [
     {
       title: 'An event',
