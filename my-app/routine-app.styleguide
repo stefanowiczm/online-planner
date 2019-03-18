@@ -1,0 +1,4 @@
+1. W aplikacji można nazywać pliki i foldery z przedrostkiem lub bez, np. app-calendar lub callendar.
+Obie formy są poprawne, sęk w tym, by przyjąć jedną formę, i się jej trzymać, by w aplikacji panowała spójność.
+
+2. Stosujemy zasadę SRP (single responsibility principle) we wszystkich srwisach, componentach i 
