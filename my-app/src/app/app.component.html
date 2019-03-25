@@ -10,7 +10,7 @@
         </p>         -->
         <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
         <app-to-do-list
-        [todos]="todosList"
+        [todos]="unscheduledTasks"
         (toggleTodo)="onToggleTodo($event)"
         (deleteTodo)="onDeleteTodo($event)"
         ></app-to-do-list>    
@@ -19,12 +19,9 @@
   </mat-grid-tile>
  
   <mat-grid-tile [colspan]="1" [style.background-color]="lightpink"> 
-    <mat-card>        
-      <mat-card-header>
-        <mat-card-title>Rozkład dnia</mat-card-title>
-      </mat-card-header>
+    <mat-card> 
       <mat-card-content style="height: 600px">
-        <app-calendar [todos]="todosList"></app-calendar>
+        <app-calendar [todos]="scheduledTasks"></app-calendar>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>

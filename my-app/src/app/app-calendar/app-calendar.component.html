@@ -1,10 +1,18 @@
 <app-calendar-header></app-calendar-header>
 
-<li *ngFor="let todo of todos">
-  <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
-  <span>{{todo.title}}</span>
-  <button type="button" (click)="onDelete(todo.id)">Delete</button>
-</li>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)"
+#doneList="cdkDropList"
+[cdkDropListData]="done"
+[cdkDropListConnectedTo]="[todoList]"
+>
+  <div class="example-box" *ngFor="let todo of todos" cdkDrag>
+    <div *ngIf="todo.scheduled">
+        <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
+        <span>{{todo.title}}</span>
+        <button type="button" (click)="onDelete(todo.id)">Delete</button>
+    </div>  
+  </div>
+</div>
 
 <app-day-view-scheduler
   [viewDate]="viewDate"
