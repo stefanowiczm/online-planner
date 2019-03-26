@@ -1,6 +1,5 @@
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let todo of todos" cdkDrag>
-      <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
       <span>{{todo.title}}</span>
       <button type="button" (click)="onDelete(todo.id)">Delete</button>
   </div>

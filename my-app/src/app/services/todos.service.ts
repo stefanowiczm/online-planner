@@ -5,7 +5,6 @@ import { DexieService } from '../dexie/dexie.service';
 
 export interface Todo {
   title: string;
-  done: boolean;
   scheduled: boolean;
 }
 

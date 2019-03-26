@@ -24,13 +24,6 @@ export class ToDoListComponent implements OnInit {
     moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
   }
 
-  onTodoToggle(event, id, newValue) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.toggleTodo.emit({
-      id,
-      done: newValue,
-    });
   }
 
   onDelete(id) {

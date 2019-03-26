@@ -7,7 +7,6 @@
 >
   <div class="example-box" *ngFor="let todo of todos" cdkDrag>
     <div *ngIf="todo.scheduled">
-        <input type="checkbox" [checked]="todo.done" (change)="onTodoToggle($event, todo.id, !todo.done)"/>
         <span>{{todo.title}}</span>
         <button type="button" (click)="onDelete(todo.id)">Delete</button>
     </div>  
