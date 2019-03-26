@@ -14,10 +14,11 @@
   </div>
 </div>
 
-<app-day-view-scheduler
-  [viewDate]="viewDate"
-  [events]="events"
-  (eventTimesChanged)="eventTimesChanged($event)"
-  (userChanged)="userChanged($event)"
->
-</app-day-view-scheduler>
+<mwl-calendar-day-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>

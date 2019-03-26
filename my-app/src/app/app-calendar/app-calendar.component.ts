@@ -3,22 +3,8 @@ import {
   CalendarEvent,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
-import { colors } from './app-calendar-utils/colors';
 import { addHours, startOfDay } from 'date-fns';
 import { TodoWithID } from '../services/todos.service';
-
-const users = [
-  {
-    id: 0,
-    name: 'John smith',
-    color: colors.yellow
-  },
-  {
-    id: 1,
-    name: 'Jane Doe',
-    color: colors.blue
-  }
-];
 
 @Component({
   selector: 'app-calendar',
@@ -33,11 +19,7 @@ export class AppCalendarComponent {
   events: CalendarEvent[] = [
     {
       title: 'An event',
-      color: users[0].color,
       start: addHours(startOfDay(new Date()), 5),
-      meta: {
-        user: users[0]
-      },
       resizable: {
         beforeStart: true,
         afterEnd: true
@@ -46,12 +28,7 @@ export class AppCalendarComponent {
     },
     {
       title: 'Another event',
-      color: users[1].color,
-      start: addHours(startOfDay(new Date()), 2),
-      meta: {
-        user: users[1]
-      },
-      resizable: {
+      start: addHours(startOfDay(new Date()), 2),      resizable: {
         beforeStart: true,
         afterEnd: true
       },
@@ -59,11 +36,7 @@ export class AppCalendarComponent {
     },
     {
       title: 'An 3rd event',
-      color: users[0].color,
       start: addHours(startOfDay(new Date()), 7),
-      meta: {
-        user: users[0]
-      },
       resizable: {
         beforeStart: true,
         afterEnd: true
@@ -82,9 +55,5 @@ export class AppCalendarComponent {
     this.events = [...this.events];
   }
 
-  userChanged({ event, newUser }) {
-    event.color = newUser.color;
-    event.meta.user = newUser;
-    this.events = [...this.events];
   }
 }
