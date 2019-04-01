@@ -5,6 +5,7 @@ import {
 } from 'angular-calendar';
 import { addHours, startOfDay } from 'date-fns';
 import { TodoWithID } from '../services/todos.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-calendar',
@@ -50,10 +51,23 @@ export class AppCalendarComponent {
     newStart,
     newEnd
   }: CalendarEventTimesChangedEvent): void {
+    console.log('zmieniam czs eventu?');
     event.start = newStart;
     event.end = newEnd;
     this.events = [...this.events];
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    console.log('callendar drop event to:', event);
+    if (event.container.id === event.previousContainer.id) {
+      console.log('calendar pierwszy if!');
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      console.log('calendar drugi if!');
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 }

@@ -1,6 +1,11 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let todo of todos" cdkDrag>
-      <span>{{todo.title}}</span>
-      <button type="button" (click)="onDelete(todo.id)">Delete</button>
+<div cdkDropList class="example-list" 
+    (cdkDropListDropped)="drop($event)"
+    id="list-1" 
+    cdkDropListConnectedTo="list-2"
+    [cdkDropListData]="tasks"
+>
+  <div class="example-box" *ngFor="let task of tasks" cdkDrag>
+      <span>{{task.title}}</span>
+      <button type="button" (click)="onDelete(task.id)">Delete</button>
   </div>
 </div>

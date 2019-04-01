@@ -37,7 +37,6 @@ export class AppComponent {
   onAddTodo(title: string) {
     const todo: Todo = {
       title,
-      done: false,
       scheduled: false,
     };
     this.todosService

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TodoWithID } from '../services/todos.service';
 
 @Component({
@@ -8,22 +8,27 @@ import { TodoWithID } from '../services/todos.service';
   styleUrls: ['./to-do-list.component.sass']
 })
 export class ToDoListComponent implements OnInit {
-  @Input() todos: Array<TodoWithID>;
+  @Input() tasks: Array<TodoWithID>;
   @Output() toggleTodo = new EventEmitter();
   @Output() deleteTodo = new EventEmitter();
 
-  constructor(
-  //  public service: ServiceUIFrameContext,
-  //  private service: ServiceUIFrameContext
-  ) {}
+  constructor() {}
 
 
   ngOnInit() { }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
-  }
-
+    console.log('todo-list drop event to:', event);
+    if (event.container.id === event.previousContainer.id) {
+      console.log('todo pierwszy if!');
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      console.log('todo drugi if!');
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 
   onDelete(id) {

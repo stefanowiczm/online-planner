@@ -10,7 +10,7 @@
         </p>         -->
         <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
         <app-to-do-list
-        [todos]="unscheduledTasks"
+        [tasks]="unscheduledTasks"
         (toggleTodo)="onToggleTodo($event)"
         (deleteTodo)="onDeleteTodo($event)"
         ></app-to-do-list>    

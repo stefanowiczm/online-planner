@@ -1,9 +1,10 @@
 <app-calendar-header></app-calendar-header>
 
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)"
-#doneList="cdkDropList"
-[cdkDropListData]="done"
-[cdkDropListConnectedTo]="[todoList]"
+<div cdkDropList class="example-list" 
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="todos"
+    id="list-2" 
+    cdkDropListConnectedTo="list-1"
 >
   <div class="example-box" *ngFor="let todo of todos" cdkDrag>
     <div *ngIf="todo.scheduled">
