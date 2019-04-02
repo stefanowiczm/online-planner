@@ -2,21 +2,13 @@ import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 
 import { DexieService } from '../dexie/dexie.service';
-
-export interface Event {
-  title: string;
-  scheduled: boolean;
-}
-
-export interface EventWithID extends Event {
-  id: number;
-}
+import { CalendarEvent } from 'angular-calendar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  table: Dexie.Table<EventWithID, number>;
+  table: Dexie.Table<CalendarEvent, number>;
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('events');
