@@ -5,6 +5,7 @@ export class DexieService extends Dexie {
     super('onlinePlannerDB');
     this.version(1).stores({
       todos: '++id',
+      events: '++id',
     });
   }
 }
