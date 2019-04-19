@@ -12,6 +12,7 @@ import { DexieService } from './dexie/dexie.service';
 import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
 import { AppCalendarModule } from './app-calendar/app-calendar.module';
+import { EventsService } from './services/events.service';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AppCalendarModule } from './app-calendar/app-calendar.module';
   ],
   providers: [
     DexieService,
-    TodosService
+    TodosService,
+    EventsService
   ],
   bootstrap: [AppComponent]
 })

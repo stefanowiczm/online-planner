@@ -5,7 +5,7 @@ import { DexieService } from '../dexie/dexie.service';
 
 export interface Todo {
   title: string;
-  scheduled: boolean;
+  order: number;
 }
 
 export interface TodoWithID extends Todo {

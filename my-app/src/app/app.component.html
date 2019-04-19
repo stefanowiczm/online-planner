@@ -1,5 +1,5 @@
-<mat-grid-list cols="2" rowHeight="650px" gutterSize="15">
-  <mat-grid-tile [colspan]="1" [style.background-color]="lightblue" gutterSize="15px" >
+<mat-grid-list cols="3" rowHeight="650px" gutterSize="15">
+  <mat-grid-tile [colspan]="1" gutterSize="15px" >
     <mat-card>
       <mat-card-header>
         <!-- <mat-card-title>{{ title }}</mat-card-title> -->
@@ -10,20 +10,20 @@
         </p>         -->
         <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
         <app-to-do-list
-        [tasks]="unscheduledTasks"
-        (toggleTodo)="onToggleTodo($event)"
+        [tasks]="todosList"
+        (changeTaskOrder)="onChangeTaskOrder($event)"
         (deleteTodo)="onDeleteTodo($event)"
         ></app-to-do-list>    
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
  
-  <mat-grid-tile [colspan]="1" [style.background-color]="lightpink"> 
-    <mat-card> 
-      <mat-card-content style="height: 600px">
-        <app-calendar [todos]="scheduledTasks"></app-calendar>
-      </mat-card-content>
-    </mat-card>
+  <mat-grid-tile [colspan]="2"> 
+    <!-- <mat-card> 
+      <mat-card-content style="height: 600px"> -->
+        <app-calendar [events]="eventsList" style="min-width: 900px;"></app-calendar>
+      <!-- </mat-card-content>
+    </mat-card> -->
   </mat-grid-tile>
 </mat-grid-list>
 
