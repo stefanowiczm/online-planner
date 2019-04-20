@@ -10,6 +10,7 @@ import { TodoWithID } from '../services/todos.service';
 export class ToDoListComponent {
   @Input() tasks: Array<TodoWithID>;
   @Output() changeTaskOrder = new EventEmitter();
+  @Output() dropCalendarEventOnTaskList = new EventEmitter();
   @Output() deleteTodo = new EventEmitter();
 
   constructor() {}
@@ -20,16 +21,16 @@ export class ToDoListComponent {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.changeTaskOrder.emit(event.container.data);
     } else {
-      console.log('todo drugi if!');
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.dropCalendarEventOnTaskList.emit(event);
     }
   }
 
   onDelete(id) {
     this.deleteTodo.emit(id);
   }
-
 }

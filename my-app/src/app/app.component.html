@@ -12,6 +12,7 @@
         <app-to-do-list
         [tasks]="todosList"
         (changeTaskOrder)="onChangeTaskOrder($event)"
+        (dropCalendarEventOnTaskList)="onDropCalendarEventOnTaskList($event)"
         (deleteTodo)="onDeleteTodo($event)"
         ></app-to-do-list>    
       </mat-card-content>

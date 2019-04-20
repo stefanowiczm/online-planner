@@ -16,7 +16,7 @@ export interface TodoWithID extends Todo {
   providedIn: 'root'
 })
 export class TodosService {
-  table: Dexie.Table<TodoWithID, number>;
+  table: Dexie.Table<Todo, number>;
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('todos');
@@ -26,15 +26,26 @@ export class TodosService {
     return this.table.toArray();
   }
 
-  add(data) {
-    return this.table.add(data);
+  add(title: string, order: number) {
+    const task = {
+      title: title,
+      order: order
+    };
+    return this.table.add(task);
   }
 
-  update(id, data) {
+  update(id: number, data: any) {
     return this.table.update(id, data);
   }
 
-  remove(id) {
+  updateTableOrder(table: Array<TodoWithID>) {
+    table.forEach((item, index) => {
+      const updatedOrder: number = index + 1;
+      this.update(item.id, { order: updatedOrder });
+    });
+  }
+
+  remove(id: number) {
     return this.table.delete(id);
   }
 }

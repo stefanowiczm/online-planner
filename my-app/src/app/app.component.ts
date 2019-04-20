@@ -4,6 +4,7 @@ import { EventsService } from './services/events.service';
 import { CalendarEvent } from 'calendar-utils';
 import { addHours, startOfDay } from 'date-fns';
 import { sortBy } from 'lodash';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -46,26 +47,25 @@ export class AppComponent implements OnInit {
   constructor(private todosService: TodosService, private eventsService: EventsService) {}
 
   ngOnInit() {
-    this.todosService.getAll().then((todos: Array<TodoWithID>) => {
-      this.todosList = sortBy(todos, ['order']);
-    });
-    this.eventsService.getAll().then((events: CalendarEvent[]) => {
-      this.eventsList = events;
-    });
+    this.todosService
+      .getAll().then((todos: Array<TodoWithID>) => {
+        this.todosList = sortBy(todos, ['order']);
+      });
+    this.eventsService
+      .getAll().then((events: CalendarEvent[]) => {
+        this.eventsList = events;
+      });
     // this.eventsService.add(this.events[0]);
     // this.eventsService.add(this.events[1]);
     // this.eventsService.add(this.events[2]);
   }
 
   onAddTodo(title: string) {
-    const todo: Todo = {
-      title: title,
-      order: this.todosList.length + 1,
-    };
     this.todosService
-      .add(todo)
-      .then((id) => {
-        this.todosList = [...this.todosList, Object.assign({}, todo, { id })];
+      .add(title, this.todosList.length + 1);
+    this.todosService
+      .getAll().then((todos) => {
+        this.todosList = sortBy(todos, ['order']);
       });
   }
 
@@ -78,19 +78,24 @@ export class AppComponent implements OnInit {
       });
   }
 
-  onChangeTaskOrder(tablica: Array<TodoWithID>) {
-    tablica.forEach((item, index) => {
-        const updatedOrder: number = index + 1;
-        this.todosService
-        .update(item.id, { order: updatedOrder });
-      });
-    }
-
-  onDropEventOnTaskList(event) {
-
+  onChangeTaskOrder(updatedTaskTable: Array<TodoWithID>) {
+    this.todosService
+      .updateTableOrder(updatedTaskTable);
   }
 
-
+  onDropCalendarEventOnTaskList(event: CdkDragDrop<any>) {
+    const calendarEvent = event.container.data[event.currentIndex];
+    const updatedTaskTable = event.container.data;
+    this.todosService
+      .add(calendarEvent.title, event.currentIndex + 1);
+    this.todosService
+      .updateTableOrder(updatedTaskTable);
+    this.eventsService
+      .remove(calendarEvent.id)
+      .then(() => {
+        this.eventsList = this.eventsList.filter((e) => e.id !== calendarEvent.id);
+    });
+  }
 
   onDeleteTodo(id: number) {
     this.todosService
