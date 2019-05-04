@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragAndDropModule } from 'angular-draggable-droppable';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { DexieService } from './dexie/dexie.service';
-import { TodosService } from './services/todos.service';
 import { AddTaskComponent } from './add-task/add-task/add-task.component';
 import { AppCalendarModule } from './app-calendar/app-calendar.module';
-import { EventsService } from './services/events.service';
 
 
 @NgModule({
@@ -28,12 +27,11 @@ import { EventsService } from './services/events.service';
     AppMaterialModule,
     BrowserAnimationsModule,
     DragDropModule,
-    AppCalendarModule
+    AppCalendarModule,
+    DragAndDropModule
   ],
   providers: [
-    DexieService,
-    TodosService,
-    EventsService
+    DexieService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,14 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import {
   CalendarEvent,
-  CalendarEventTimesChangedEvent
+  CalendarEventTimesChangedEvent,
+  CalendarView
 } from 'angular-calendar';
-import { addHours, startOfDay } from 'date-fns';
-import { TodoWithID } from '../services/todos.service';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs';
+import { colors } from './app-calendar-utils/colors';
+import { find } from 'lodash';
+import { TodosService } from '../services/todos.service';
+import { EventsService } from '../services/events.service';
 
 @Component({
   selector: 'app-calendar',
@@ -46,6 +49,13 @@ export class AppCalendarComponent {
     }
   ];
 
+  ngOnInit() {
+    this.eventsService
+      .getAll().then((events: CalendarEvent[]) => {
+        this.events = events;
+        console.log('app.callendar pobrał events:', events);
+      });
+  }
   eventTimesChanged({
     event,
     newStart,

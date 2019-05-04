@@ -1,30 +1,10 @@
-<mat-grid-list cols="2" rowHeight="450px">
-  <!-- <app-calendar-header></app-calendar-header> -->
-  <mat-grid-tile [colspan]="1">
-    <div cdkDropList class="example-list" 
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListData]="events"
-        id="list-2" 
-        cdkDropListConnectedTo="list-1"
-    >
-      <div class="example-box" *ngFor="let event of events" cdkDrag>
-        <div>
-            <span>{{event.title}}</span>
-            <button type="button" (click)="onDelete(event.id)">Delete</button>
-        </div>  
-      </div>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="1">
-    <mat-card>
-      <mwl-calendar-day-view
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      >
-    </mwl-calendar-day-view>
-  </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<mat-card style="transform: scale(0.5, 0.3)">      
+  <mwl-calendar-day-view
+  [viewDate]="viewDate"
+  [events]="events"
+  [refresh]="refresh"
+  [snapDraggedEvents]="false"
+  (eventTimesChanged)="eventDropped($event)"
+  >
+  </mwl-calendar-day-view>
+</mat-card>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoWithID, Todo, TodosService } from './services/todos.service';
-import { EventsService } from './services/events.service';
 import { CalendarEvent } from 'calendar-utils';
 import { addHours, startOfDay } from 'date-fns';
 import { sortBy } from 'lodash';
@@ -12,9 +11,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  title = 'Lista zadań';
   todosList: Array<TodoWithID> = [];
-  eventsList: CalendarEvent[] = [];
   events: CalendarEvent[] = [
     {
       title: 'An event',
@@ -44,16 +41,12 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  constructor(private todosService: TodosService, private eventsService: EventsService) {}
+  constructor(private todosService: TodosService) {}
 
   ngOnInit() {
     this.todosService
       .getAll().then((todos: Array<TodoWithID>) => {
         this.todosList = sortBy(todos, ['order']);
-      });
-    this.eventsService
-      .getAll().then((events: CalendarEvent[]) => {
-        this.eventsList = events;
       });
     // this.eventsService.add(this.events[0]);
     // this.eventsService.add(this.events[1]);
