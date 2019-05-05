@@ -10,7 +10,6 @@
         </p>         -->
         <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
         <app-to-do-list
-        [tasks]="todosList"
         (changeTaskOrder)="onChangeTaskOrder($event)"
         (dropCalendarEventOnTaskList)="onDropCalendarEventOnTaskList($event)"
         (deleteTodo)="onDeleteTodo($event)"
