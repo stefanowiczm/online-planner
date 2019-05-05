@@ -43,15 +43,7 @@ export class AppComponent implements OnInit {
 
   constructor(private todosService: TodosService) {}
 
-  ngOnInit() {
-    this.todosService
-      .getAll().then((todos: Array<TodoWithID>) => {
-        this.todosList = sortBy(todos, ['order']);
-      });
-    // this.eventsService.add(this.events[0]);
-    // this.eventsService.add(this.events[1]);
-    // this.eventsService.add(this.events[2]);
-  }
+  ngOnInit() {}
 
   onAddTodo(title: string) {
     this.todosService

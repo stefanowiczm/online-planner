@@ -17,7 +17,7 @@ import { EventsService } from '../services/events.service';
   styleUrls: ['./app-calendar.component.sass']
 })
 
-export class AppCalendarComponent {
+export class AppCalendarComponent implements OnInit {
   viewDate = new Date();
   @Input() todos: Array<TodoWithID>;
   events: CalendarEvent[] = [
