@@ -12,7 +12,6 @@ export class ToDoListComponent implements OnInit {
   tasks: Array<TodoWithID>;
   @Output() changeTaskOrder = new EventEmitter();
   @Output() dropCalendarEventOnTaskList = new EventEmitter();
-  @Output() deleteTodo = new EventEmitter();
 
   constructor(private todosService: TodosService) {}
 
@@ -37,7 +36,11 @@ export class ToDoListComponent implements OnInit {
     }
   }
 
-  onDelete(id) {
-    this.deleteTodo.emit(id);
+  deleteTask(id) {
+    this.todosService
+    .remove(id)
+    .then(() => {
+        this.tasks = this.tasks.filter((todo) => todo.id !== id);
+     });
   }
 }
