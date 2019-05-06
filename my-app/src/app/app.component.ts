@@ -62,31 +62,4 @@ export class AppComponent implements OnInit {
         this.todosList = [...this.todosList.filter((todo) => todo.id !== id), Object.assign({}, todoToUpdate, { done })];
       });
   }
-
-  onChangeTaskOrder(updatedTaskTable: Array<TodoWithID>) {
-    this.todosService
-      .updateTableOrder(updatedTaskTable);
-  }
-
-  onDropCalendarEventOnTaskList(event: CdkDragDrop<any>) {
-    const calendarEvent = event.container.data[event.currentIndex];
-    const updatedTaskTable = event.container.data;
-    this.todosService
-      .add(calendarEvent.title, event.currentIndex + 1);
-    this.todosService
-      .updateTableOrder(updatedTaskTable);
-    this.eventsService
-      .remove(calendarEvent.id)
-      .then(() => {
-        this.eventsList = this.eventsList.filter((e) => e.id !== calendarEvent.id);
-    });
-  }
-
-  onDeleteTodo(id: number) {
-    this.todosService
-    .remove(id)
-    .then(() => {
-        this.todosList = this.todosList.filter((todo) => todo.id !== id);
-     });
-  }
 }

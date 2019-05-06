@@ -10,8 +10,6 @@ import { sortBy } from 'lodash';
 })
 export class ToDoListComponent implements OnInit {
   tasks: Array<TodoWithID>;
-  @Output() changeTaskOrder = new EventEmitter();
-  @Output() dropCalendarEventOnTaskList = new EventEmitter();
 
   constructor(private todosService: TodosService) {}
 
@@ -22,17 +20,16 @@ export class ToDoListComponent implements OnInit {
       });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event) {
     if (event.container.id === event.previousContainer.id) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      this.changeTaskOrder.emit(event.container.data);
+      moveItemInArray(event.container.data,
+                      event.previousIndex,
+                      event.currentIndex);
+      this.todosService
+      .updateTableOrder(event.container.data);
     } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.dropCalendarEventOnTaskList.emit(event);
+    }
+  }
     }
   }
 

@@ -3,20 +3,13 @@
     <mat-card>      
       <mat-card-content>
         <app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
-        <app-to-do-list
-        (changeTaskOrder)="onChangeTaskOrder($event)"
-        (dropCalendarEventOnTaskList)="onDropCalendarEventOnTaskList($event)"
-        ></app-to-do-list>    
+        <app-to-do-list></app-to-do-list>    
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
  
   <mat-grid-tile [colspan]="2"> 
-    <!-- <mat-card> 
-      <mat-card-content style="height: 600px"> -->
-        <app-calendar style="min-width: 900px;"></app-calendar>
-      <!-- </mat-card-content>
-    </mat-card> -->
+    <app-calendar style="min-width: 900px;"></app-calendar>
   </mat-grid-tile>
 </mat-grid-list>
 
