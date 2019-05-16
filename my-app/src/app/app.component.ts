@@ -3,7 +3,6 @@ import { TodoWithID, Todo, TodosService } from './services/todos.service';
 import { CalendarEvent } from 'calendar-utils';
 import { addHours, startOfDay } from 'date-fns';
 import { sortBy } from 'lodash';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -44,15 +43,6 @@ export class AppComponent implements OnInit {
   constructor(private todosService: TodosService) {}
 
   ngOnInit() {}
-
-  onAddTodo(title: string) {
-    this.todosService
-      .add(title, this.todosList.length + 1);
-    this.todosService
-      .getAll().then((todos) => {
-        this.todosList = sortBy(todos, ['order']);
-      });
-  }
 
   onToggleTodo({ id, done }: { id: number, done: boolean }) {
     this.todosService

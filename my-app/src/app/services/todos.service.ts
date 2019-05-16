@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import Dexie from 'dexie';
 
 import { DexieService } from '../dexie/dexie.service';
@@ -17,6 +17,8 @@ export interface TodoWithID extends Todo {
 })
 export class TodosService {
   table: Dexie.Table<Todo, number>;
+
+  @Output() change: EventEmitter<any> = new EventEmitter();
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('todos');

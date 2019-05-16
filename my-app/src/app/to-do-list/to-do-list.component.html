@@ -1,10 +1,20 @@
-<div cdkDropList class="example-list" 
-    (cdkDropListDropped)="drop($event)"
-    id="list-1" 
-    [cdkDropListData]="tasks"
->
-  <div class="example-box" *ngFor="let task of tasks" cdkDrag>
-      <span>{{task.title}}</span>
-      <button type="button" (click)="deleteTask(task.id)">Delete</button>
+<app-add-task (addTodo)="onAddTodo($event)"></app-add-task>
+
+ <div  
+    class="card"
+    mwlDroppable
+    (drop)="externalDrop($event.dropData.event)"
+    dragOverClass="drag-over"
+  >  
+  <div class="cal-event"
+    *ngFor="let task of tasks"
+    mwlDraggable
+    [dropData]="{event: task}"
+    dragActiveClass="drag-active"
+  >
+    <span class="cal-event-title ng-star-inserted">{{ task.title }}</span>
+    <button mat-icon-button color="primary" type="button" (click)="deleteTask(task.id)" style="float: right">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
-</div>
+  </div> 

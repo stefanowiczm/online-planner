@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 import { TodoWithID, TodosService } from '../services/todos.service';
+import { CalendarEvent } from 'calendar-utils';
 import { sortBy } from 'lodash';
 
 @Component({
@@ -10,34 +10,42 @@ import { sortBy } from 'lodash';
 })
 export class ToDoListComponent implements OnInit {
   tasks: Array<TodoWithID>;
+  events: CalendarEvent[];
 
   constructor(private todosService: TodosService) {}
 
   ngOnInit() {
+    this.getTasks();
+    this.todosService.change.subscribe(() => {
+      this.getTasks();
+    });
+  }
+
+  getTasks() {
     this.todosService
-      .getAll().then((todos: Array<TodoWithID>) => {
+    .getAll()
+    .then((todos: Array<TodoWithID>) => {
+      this.tasks = sortBy(todos, ['order']);
+    });
+  }
+
+  onAddTodo(title: string) {
+    this.todosService
+      .add(title, this.tasks.length + 1);
+    this.todosService
+      .getAll().then((todos) => {
         this.tasks = sortBy(todos, ['order']);
       });
   }
 
-  drop(event) {
-    if (event.container.id === event.previousContainer.id) {
-      moveItemInArray(event.container.data,
-                      event.previousIndex,
-                      event.currentIndex);
-      this.todosService
-      .updateTableOrder(event.container.data);
-    } else {
-    }
-  }
-    }
   }
 
   deleteTask(id) {
     this.todosService
-    .remove(id)
-    .then(() => {
-        this.tasks = this.tasks.filter((todo) => todo.id !== id);
-     });
+    .remove(id);
+    this.todosService
+      .getAll().then((todos) => {
+        this.tasks = sortBy(todos, ['order']);
+      });
   }
 }

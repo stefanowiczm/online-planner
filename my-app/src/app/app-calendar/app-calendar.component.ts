@@ -5,8 +5,6 @@ import {
   CalendarView
 } from 'angular-calendar';
 import { Subject } from 'rxjs';
-import { colors } from './app-calendar-utils/colors';
-import { find } from 'lodash';
 import { TodosService } from '../services/todos.service';
 import { EventsService } from '../services/events.service';
 
@@ -18,66 +16,46 @@ import { EventsService } from '../services/events.service';
 })
 
 export class AppCalendarComponent implements OnInit {
-  viewDate = new Date();
-  @Input() todos: Array<TodoWithID>;
-  events: CalendarEvent[] = [
-    {
-      title: 'An event',
-      start: addHours(startOfDay(new Date()), 5),
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      title: 'Another event',
-      start: addHours(startOfDay(new Date()), 2),      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      title: 'An 3rd event',
-      start: addHours(startOfDay(new Date()), 7),
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  viewDate: Date = new Date(2019, 1, 1);
+  events: CalendarEvent[] = [];
+  CalendarView = CalendarView;
+
+  view = CalendarView.Day;
+
+  activeDayIsOpen = false;
+
+  refresh = new Subject<void>();
+
+  constructor(private todosService: TodosService, private eventsService: EventsService) {}
 
   ngOnInit() {
-    this.eventsService
-      .getAll().then((events: CalendarEvent[]) => {
-        this.events = events;
-        console.log('app.callendar pobrał events:', events);
-      });
-  }
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd
-  }: CalendarEventTimesChangedEvent): void {
-    console.log('zmieniam czs eventu?');
-    event.start = newStart;
-    event.end = newEnd;
-    this.events = [...this.events];
+    this.events = [];
+    this.getEvents();
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log('callendar drop event to:', event);
-    if (event.container.id === event.previousContainer.id) {
-      console.log('calendar pierwszy if!');
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      console.log('calendar drugi if!');
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+  getEvents() {
+    this.eventsService
+    .getAll().then((events: Array<CalendarEvent>) => {
+      this.events = [...events];
+    });
+  }
+
+  eventDropped({
+    event,
+    newStart,
+    newEnd }: CalendarEventTimesChangedEvent): void {
+    const newEvent: CalendarEvent = {
+      start: newStart,
+      end: newEnd,
+      draggable: true,
+      title: event.title,
+    };
+    this.eventsService.add(newEvent);
+    this.events.push(newEvent);
+    this.events = [...this.events];
+    const taskId =  Number(event.id);
+    this.todosService.remove(taskId).then(() => {
+      this.todosService.change.emit(null);
+    });
   }
 }
