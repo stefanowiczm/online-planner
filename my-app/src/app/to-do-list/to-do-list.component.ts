@@ -12,7 +12,10 @@ import 'dexie-observable';
 export class ToDoListComponent implements OnInit {
   tasks: Array<TodoWithID>;
 
-  constructor(private todosService: TodosService, private eventsService: EventsService) {}
+  constructor(
+    private todosService: TodosService,
+    private eventsService: EventsService
+  ) {}
 
   ngOnInit() {
     this.getTasks();

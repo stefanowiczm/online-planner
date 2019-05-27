@@ -12,7 +12,9 @@ export class EventsService {
 
   @Output() changeEmitter: EventEmitter<any> = new EventEmitter();
 
-  constructor(private dexieService: DexieService) {
+  constructor(
+    private dexieService: DexieService
+  ) {
     this.table = this.dexieService.table('events');
     this.dexieService.on('changes', (changes) => {
       changes.forEach((change) => {

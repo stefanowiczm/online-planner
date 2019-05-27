@@ -26,7 +26,10 @@ export class AppCalendarComponent implements OnInit {
 
   refresh = new Subject<void>();
 
-  constructor(private todosService: TodosService, private eventsService: EventsService) {}
+  constructor(
+    private todosService: TodosService,
+    private eventsService: EventsService
+  ) {}
 
   ngOnInit() {
     this.getEvents();
