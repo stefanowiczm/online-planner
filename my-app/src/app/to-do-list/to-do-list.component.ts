@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoWithID, TodosService } from '../services/todos.service';
+import { TodoWithID, TodosService, Todo } from '../services/todos.service';
+import { EventsService } from '../services/events.service';
 import { CalendarEvent } from 'calendar-utils';
-import { sortBy } from 'lodash';
+import 'dexie-observable';
 
 @Component({
   selector: 'app-to-do-list',
@@ -10,14 +11,27 @@ import { sortBy } from 'lodash';
 })
 export class ToDoListComponent implements OnInit {
   tasks: Array<TodoWithID>;
-  events: CalendarEvent[];
 
-  constructor(private todosService: TodosService) {}
+  constructor(private todosService: TodosService, private eventsService: EventsService) {}
 
   ngOnInit() {
     this.getTasks();
-    this.todosService.change.subscribe(() => {
-      this.getTasks();
+
+    this.todosService.changeEmitter
+    .subscribe((change) => {
+        switch (change.type) {
+          case 1: // CREATED
+          console.log('robie add');
+            this.tasks.push(change.obj);
+            break;
+          case 2: // UPDATED
+            console.log('An object with key ' + change.key + ' was updated with modifications: ' + JSON.stringify(change.obj));
+            break;
+          case 3: // DELETED
+          console.log('remove');
+            this.tasks = [...this.tasks.filter((task) => task.id !== change.oldObj.id)];
+            break;
+      }
     });
   }
 
@@ -25,27 +39,25 @@ export class ToDoListComponent implements OnInit {
     this.todosService
     .getAll()
     .then((todos: Array<TodoWithID>) => {
-      this.tasks = sortBy(todos, ['order']);
+      this.tasks = todos;
     });
   }
 
   onAddTodo(title: string) {
     this.todosService
-      .add(title, this.tasks.length + 1);
-    this.todosService
-      .getAll().then((todos) => {
-        this.tasks = sortBy(todos, ['order']);
-      });
+      .add(title);
   }
 
+  externalDrop(event) {
+    if (this.tasks.indexOf(event) === -1) {
+      this.todosService.add(event.title);
+      const taskId =  event.id.toString();
+      this.eventsService.remove(taskId);
+    }
   }
 
-  deleteTask(id) {
+  deleteTask(id: string) {
     this.todosService
-    .remove(id);
-    this.todosService
-      .getAll().then((todos) => {
-        this.tasks = sortBy(todos, ['order']);
-      });
+      .remove(id);
   }
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoWithID, Todo, TodosService } from './services/todos.service';
+import { TodoWithID, TodosService } from './services/todos.service';
 import { CalendarEvent } from 'calendar-utils';
 import { addHours, startOfDay } from 'date-fns';
-import { sortBy } from 'lodash';
 
 @Component({
   selector: 'app-root',

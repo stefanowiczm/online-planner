@@ -33,11 +33,9 @@ export class AppCalendarComponent implements OnInit {
     this.eventsService.changeEmitter
     .subscribe((change) => {
       switch (change.type) {
-        case 1: // CREATED
-        this.events.push(change.obj);
-        break;
         case 3: // DELETED
         this.events = this.events.filter((event) => event.id !== change.oldObj.id);
+        this.refresh.next();
         break;
       }
     });
@@ -68,6 +66,8 @@ export class AppCalendarComponent implements OnInit {
           draggable: true,
           title: event.title,
         };
+        this.events.push(newEvent);
+        this.refresh.next();
         this.eventsService.add(newEvent);
         const taskId =  event.id.toString();
         this.todosService.remove(taskId);
