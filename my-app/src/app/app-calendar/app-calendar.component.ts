@@ -29,14 +29,25 @@ export class AppCalendarComponent implements OnInit {
   constructor(private todosService: TodosService, private eventsService: EventsService) {}
 
   ngOnInit() {
-    this.events = [];
     this.getEvents();
+    this.eventsService.changeEmitter
+    .subscribe((change) => {
+      switch (change.type) {
+        case 1: // CREATED
+        this.events.push(change.obj);
+        break;
+        case 3: // DELETED
+        this.events = this.events.filter((event) => event.id !== change.oldObj.id);
+        break;
+      }
+    });
   }
 
   getEvents() {
     this.eventsService
     .getAll().then((events: Array<CalendarEvent>) => {
       this.events = [...events];
+      this.refresh.next();
     });
   }
 
@@ -44,18 +55,22 @@ export class AppCalendarComponent implements OnInit {
     event,
     newStart,
     newEnd }: CalendarEventTimesChangedEvent): void {
-    const newEvent: CalendarEvent = {
-      start: newStart,
-      end: newEnd,
-      draggable: true,
-      title: event.title,
-    };
-    this.eventsService.add(newEvent);
-    this.events.push(newEvent);
-    this.events = [...this.events];
-    const taskId =  Number(event.id);
-    this.todosService.remove(taskId).then(() => {
-      this.todosService.change.emit(null);
-    });
+      if (this.events.includes(event)) {
+        const eventToUpdate = this.events.find((element) => element.id === event.id);
+        this.events = [...this.events.filter((todo) => todo.id !== event.id), Object.assign({}, eventToUpdate, {start: newStart})];
+        this.refresh.next();
+        this.eventsService
+        .update(event.id, {start: newStart});
+      } else {
+        const newEvent: CalendarEvent = {
+          start: newStart,
+          end: newEnd,
+          draggable: true,
+          title: event.title,
+        };
+        this.eventsService.add(newEvent);
+        const taskId =  event.id.toString();
+        this.todosService.remove(taskId);
+    }
   }
 }

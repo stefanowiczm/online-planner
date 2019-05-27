@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import Dexie from 'dexie';
 
 import { DexieService } from '../dexie/dexie.service';
@@ -10,8 +10,17 @@ import { CalendarEvent } from 'angular-calendar';
 export class EventsService {
   table: Dexie.Table<CalendarEvent, number>;
 
+  @Output() changeEmitter: EventEmitter<any> = new EventEmitter();
+
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('events');
+    this.dexieService.on('changes', (changes) => {
+      changes.forEach((change) => {
+        if (change.table === 'events') {
+          this.changeEmitter.emit(change);
+        }
+      });
+    });
   }
 
   getAll() {

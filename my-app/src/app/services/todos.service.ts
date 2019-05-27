@@ -5,38 +5,43 @@ import { DexieService } from '../dexie/dexie.service';
 
 export interface Todo {
   title: string;
-  order: number;
 }
 
 export interface TodoWithID extends Todo {
-  id: number;
+  id: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodosService {
-  table: Dexie.Table<Todo, number>;
+  table: Dexie.Table<Todo, string>;
 
-  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output() changeEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('todos');
+    this.dexieService.on('changes', (changes) => {
+      changes.forEach((change) => {
+        if (change.table === 'todos') {
+          this.changeEmitter.emit(change);
+        }
+      });
+    });
   }
 
   getAll() {
     return this.table.toArray();
   }
 
-  add(title: string, order: number) {
+  add(title: string) {
     const task = {
-      title: title,
-      order: order
+      title: title
     };
     return this.table.add(task);
   }
 
-  update(id: number, data: any) {
+  update(id: string, data: any) {
     return this.table.update(id, data);
   }
 
@@ -47,7 +52,7 @@ export class TodosService {
     });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.table.delete(id);
   }
 }

@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  onToggleTodo({ id, done }: { id: number, done: boolean }) {
+  onToggleTodo({ id, done }: { id: string, done: boolean }) {
     this.todosService
       .update(id, { done })
       .then(() => {
