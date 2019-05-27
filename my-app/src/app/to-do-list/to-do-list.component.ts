@@ -21,14 +21,9 @@ export class ToDoListComponent implements OnInit {
     .subscribe((change) => {
         switch (change.type) {
           case 1: // CREATED
-          console.log('robie add');
             this.tasks.push(change.obj);
             break;
-          case 2: // UPDATED
-            console.log('An object with key ' + change.key + ' was updated with modifications: ' + JSON.stringify(change.obj));
-            break;
           case 3: // DELETED
-          console.log('remove');
             this.tasks = [...this.tasks.filter((task) => task.id !== change.oldObj.id)];
             break;
       }
