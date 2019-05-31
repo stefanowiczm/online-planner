@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
@@ -18,6 +18,8 @@ import { EventsService } from '../services/events.service';
 export class AppCalendarComponent implements OnInit {
   viewDate: Date = new Date(2019, 1, 1);
   events: CalendarEvent[] = [];
+  @Input() startHour: number;
+  @Input() endHour: number;
   CalendarView = CalendarView;
 
   view = CalendarView.Day;

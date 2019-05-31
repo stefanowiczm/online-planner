@@ -1,15 +1,36 @@
-<mat-grid-list cols="3" rowHeight="650px" gutterSize="15">
-  <mat-grid-tile [colspan]="1" gutterSize="15px" >
+<mat-grid-list cols="2" rowHeight="100px" gutterSize="15">
+  <mat-grid-tile [rowspan]="1" [colspan]="1" gutterSize="15px" >
+    <mat-card>
+        <mat-form-field>
+          <mat-label>Zacznij dzień o godzinie:</mat-label>
+          <mat-select [(value)]="startHour">
+            <mat-option *ngFor="let hour of hours" [value]="hour.value">
+              {{hour.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Koniec dnia:</mat-label>
+          <mat-select [(value)]="endHour">
+            <mat-option *ngFor="let hour of hours" [value]="hour.value">
+              {{hour.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </mat-card>
+  </mat-grid-tile>
+  
+  <mat-grid-tile [rowspan]="6" [colspan]="1"> 
+    <app-calendar [startHour]="startHour" [endHour]="endHour" style="min-width: 250px"></app-calendar>
+  </mat-grid-tile>
+  
+  <mat-grid-tile [rowspan]="4" [colspan]="1" gutterSize="15px" >
     <mat-card>      
       <mat-card-content>        
         <app-to-do-list></app-to-do-list>    
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
- 
-  <mat-grid-tile [colspan]="2"> 
-    <app-calendar style="min-width: 900px;"></app-calendar>
-  </mat-grid-tile>
-</mat-grid-list>
 
+</mat-grid-list>
 <router-outlet></router-outlet>

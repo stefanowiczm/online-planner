@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoWithID, TodosService } from './services/todos.service';
 import { CalendarEvent } from 'calendar-utils';
 import { addHours, startOfDay } from 'date-fns';
+import { hours } from './app-calendar/app-calendar-utils/hours';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,9 @@ import { addHours, startOfDay } from 'date-fns';
 })
 export class AppComponent implements OnInit {
   todosList: Array<TodoWithID> = [];
+  hours = hours;
+  startHour = 7;
+  endHour = 22;
   events: CalendarEvent[] = [
     {
       title: 'An event',

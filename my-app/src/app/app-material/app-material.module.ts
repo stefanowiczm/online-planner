@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatDividerModule} from '@angular/material';
+import {MatIconModule, MatCardModule, MatCheckboxModule,
+        MatButtonModule, MatInputModule, MatDividerModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule, MatInp
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule
   ],
   exports: [
     MatGridListModule,
@@ -21,7 +23,8 @@ import {MatIconModule, MatCardModule, MatCheckboxModule, MatButtonModule, MatInp
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule
   ]
 })
 export class AppMaterialModule { }
