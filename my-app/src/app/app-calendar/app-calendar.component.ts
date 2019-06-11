@@ -59,17 +59,26 @@ export class AppCalendarComponent implements OnInit {
     newStart,
     newEnd }: CalendarEventTimesChangedEvent): void {
       if (this.events.includes(event)) {
-        const eventToUpdate = this.events.find((element) => element.id === event.id);
-        this.events = [...this.events.filter((todo) => todo.id !== event.id), Object.assign({}, eventToUpdate, {start: newStart})];
+        const eventToUpdate = this.events.find(
+          (element) => element.id === event.id);
+        const updateData = {start: newStart, end: newEnd};
+        this.events = [...this.events.filter(
+          (todo) => todo.id !== event.id),
+          Object.assign({}, eventToUpdate, updateData
+        )];
         this.refresh.next();
         this.eventsService
-        .update(event.id, {start: newStart});
+        .update(event.id, updateData);
       } else {
         const newEvent: CalendarEvent = {
           start: newStart,
           end: newEnd,
           draggable: true,
           title: event.title,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          }
         };
         this.events.push(newEvent);
         this.refresh.next();

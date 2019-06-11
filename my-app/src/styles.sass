@@ -1,21 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/angular-calendar/css/angular-calendar.css"
+@import ./app/app-calendar/app-calendar.component.sass
+@import ./app/app.component.sass
 body 
-    background-color: rgba(0, 0, 0, 0.03)
+  background-color: rgba(0, 0, 0, 0.03)
     
-    mat-grid-list
-        margin: 30px    
+  mat-grid-list
+    margin: 30px
 
-    .spacer
+    .mat-grid-tile
+          
+      .mat-figure
+        display: block
+
+      .spacer
         flex: 1 1 auto
 
-    .mat-card 
+      .mat-card 
         margin: 6px
 
-.drag-active 
-  position: relative
-  z-index: 1
-  pointer-events: none
-      
-.drag-over 
-  background-color: #eee
+        .drag-active 
+          position: relative
+          z-index: 1
+          pointer-events: none
+              
+        .drag-over 
+          background-color: #eee

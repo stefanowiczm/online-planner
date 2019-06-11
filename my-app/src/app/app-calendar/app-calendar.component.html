@@ -1,5 +1,5 @@
-<!-- <mat-card style="transform: scale(0.5, 0.3)">       -->
-<mat-card>      
+<!-- <mat-card style="transform: scale(0.5, 0.5)">       -->
+
   <mwl-calendar-day-view
   [viewDate]="viewDate"
   [events]="events"
@@ -8,6 +8,8 @@
   (eventTimesChanged)="eventDropped($event)"
   [dayStartHour]="startHour"
   [dayEndHour]="endHour"
+  [hourSegments]="6"
   >
   </mwl-calendar-day-view>
-</mat-card>
+
+  <!-- </mat-card> -->
