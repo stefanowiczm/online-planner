@@ -83,8 +83,7 @@ export class AppCalendarComponent implements OnInit {
         this.events.push(newEvent);
         this.refresh.next();
         this.eventsService.add(newEvent);
-        const taskId =  event.id.toString();
-        this.todosService.remove(taskId);
+        this.todosService.remove(event.id.toString());
     }
   }
 }
